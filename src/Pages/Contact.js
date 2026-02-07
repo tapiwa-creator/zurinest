@@ -58,7 +58,7 @@ const Contact = () => {
         console.error('Error sending email:', error.text);
         setSubmitStatus({ 
           type: 'error', 
-          message: 'Sorry, there was an error sending your message. Please try again.' 
+          message: 'Sorry, there was an error sending your message. You can contact us directly via email or phone.' 
         });
       })
       .finally(() => {

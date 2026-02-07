@@ -117,76 +117,37 @@ const Header = () => {
           />
         )}
         
-        {/* Sidebar Menu - slides in from right */}
+        {/* Sidebar Menu - slides in from right, ends after navigation */}
         <div 
-          className={`fixed top-0 right-0 z-50 h-full w-64 bg-[#1c355e] shadow-xl transform transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 z-50 bg-[#1c355e] shadow-xl transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          {/* Sidebar Header with Logo */}
-          <div className="flex items-center justify-center p-6 border-b border-white/10">
-            <div className="flex items-center space-x-3">
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-white p-1">
-                <img 
-                  src="/logo.png" 
-                  alt="ZuriNest Logo" 
-                  className="h-full w-full rounded-full object-contain p-1"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "/logo.svg";
-                  }}
-                />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-serif text-xl text-white">ZuriNest</span>
-                <span className="text-[9px] uppercase tracking-[0.3em] text-white">Contractors</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="p-6">
-            <ul className="space-y-4">
+          {/* Navigation Links Only */}
+          <nav className="p-6 pt-20">
+            <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
                     onClick={handleLinkClick}
-                    className={`flex items-center py-3 px-4 rounded-lg transition-all duration-200 ${
+                    className={`flex items-center py-4 px-4 rounded-lg transition-all duration-200 ${
                       isActive(link.path) 
-                        ? 'bg-white/10 text-[#14ddfd]' 
+                        ? 'bg-white/10 text-[#14ddfd] font-semibold' 
                         : 'text-white hover:bg-white/5 hover:text-[#14ddfd]'
                     }`}
                   >
-                    <span className="font-medium">{link.name}</span>
-                    {isActive(link.path) && (
-                      <span className="ml-auto text-sm">●</span>
-                    )}
+                    <span className="text-lg font-medium">{link.name}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-
-          {/* Optional: Contact Info or CTA in Sidebar */}
-          <div className="absolute bottom-0 w-full p-6 border-t border-white/10">
-            <div className="text-center">
-              <a 
-                href="tel:+1234567890"
-                className="inline-block w-full py-3 bg-[#14ddfd] text-[#1c355e] font-semibold rounded-lg hover:bg-[#0fbcdd] transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Call Now
-              </a>
-              <p className="mt-3 text-xs text-white/70">
-                Available 24/7 for consultations
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </>
   );
 };
+
 
 export default Header;

@@ -20,65 +20,75 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 z-50 flex w-full items-center justify-between bg-[#1c355e] px-12 py-5 shadow-sm">
-      {/* Logo Area */}
-      <Link 
-        to="/" 
-        className="flex items-center space-x-3"
-        onClick={handleLinkClick}
-      >
-        {/* Circular Logo Container */}
-        <div className="flex items-center space-x-3">
-          {/* Circular frame for logo */}
-          <div className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-white bg-white p-1 shadow-md">
-            <img 
-              src="/logo.png" 
-              alt="ZuriNest Logo" 
-              className="h-full w-full rounded-full object-contain p-1"
-              onError={(e) => {
-                // Try SVG if PNG doesn't exist
-                e.target.onerror = null;
-                e.target.src = "/logo.svg";
-              }}
-            />
+    <>
+      <header className="fixed top-0 z-50 flex w-full items-center justify-between bg-[#1c355e] px-4 py-3 shadow-sm sm:px-6 sm:py-4 md:px-8 md:py-4 lg:px-12 lg:py-5">
+        {/* Logo Area */}
+        <Link 
+          to="/" 
+          className="flex items-center space-x-2 md:space-x-3"
+          onClick={handleLinkClick}
+        >
+          {/* Circular Logo Container */}
+          <div className="flex items-center space-x-2 md:space-x-3">
+            {/* Circular frame for logo */}
+            <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-full border-2 border-white bg-white p-1 shadow-md">
+              <img 
+                src="/logo.png" 
+                alt="ZuriNest Logo" 
+                className="h-full w-full rounded-full object-contain p-1"
+                onError={(e) => {
+                  // Try SVG if PNG doesn't exist
+                  e.target.onerror = null;
+                  e.target.src = "/logo.svg";
+                }}
+              />
+            </div>
+            
+            {/* Text logo - ZuriNest */}
+            <div className="flex flex-col leading-none">
+              <span className="font-serif text-lg sm:text-xl md:text-2xl tracking-tighter text-white">
+                ZuriNest
+              </span>
+              <span className="ml-1 text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white">
+                Contractors
+              </span>
+            </div>
           </div>
-          
-          {/* Text logo - ZuriNest */}
-          <div className="flex flex-col leading-none">
-            <span className="font-serif text-2xl tracking-tighter text-white">
-              ZuriNest
-            </span>
-            <span className="ml-1 text-[10px] uppercase tracking-[0.4em] text-white">
-              Contractors
-            </span>
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-      {/* Navigation */}
-      <nav>
-        <ul className="flex items-center space-x-10 font-sans text-[16px] font-medium text-white">
-          {navLinks.map((link) => (
-            <li key={link.name} className="relative">
-              <Link
-                to={link.path}
-                onClick={handleLinkClick}
-                className={`transition-colors duration-300 hover:text-[#14ddfd] ${
-                  isActive(link.path) ? 'text-[#14ddfd]' : ''
-                }`}
-              >
-                {link.name}
-              </Link>
-              
-              {/* Dynamic Underline for Active State */}
-              {isActive(link.path) && (
-                <div className="absolute -bottom-1 left-0 h-[1.5px] w-full bg-[#14ddfd]"></div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+        {/* Navigation - Hidden on mobile, visible on tablet and up */}
+        <nav className="hidden md:block">
+          <ul className="flex items-center space-x-6 lg:space-x-8 xl:space-x-10 font-sans text-sm md:text-[15px] lg:text-[16px] font-medium text-white">
+            {navLinks.map((link) => (
+              <li key={link.name} className="relative">
+                <Link
+                  to={link.path}
+                  onClick={handleLinkClick}
+                  className={`transition-colors duration-300 hover:text-[#14ddfd] ${
+                    isActive(link.path) ? 'text-[#14ddfd]' : ''
+                  }`}
+                >
+                  {link.name}
+                </Link>
+                
+                {/* Dynamic Underline for Active State */}
+                {isActive(link.path) && (
+                  <div className="absolute -bottom-1 left-0 h-[1.5px] w-full bg-[#14ddfd]"></div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Mobile Menu Button - Visible only on mobile */}
+        <button className="md:hidden text-white text-lg font-semibold">
+          ☰
+        </button>
+      </header>
+      
+      {/* Spacer - Critical to prevent content overlap */}
+      <div className="h-12 sm:h-14 md:h-16 lg:h-20"></div>
+    </>
   );
 };
 
